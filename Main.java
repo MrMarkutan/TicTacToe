@@ -94,7 +94,7 @@ public class Main {
         while(true) {
             turnX();
             break;
-            turnO();
+            //turnO();
             /* System.out.print("Enter the coordinates: ");
 
             int row, col;
