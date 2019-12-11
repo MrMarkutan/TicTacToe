@@ -34,137 +34,77 @@ public class Main {
         }
         System.out.println("---------");
     }
-//    String checkWin(int x, int o) {
-//        boolean xWins = false;
-//        boolean oWins = false;
-//        int freeSpace = 0;
-//        for (int col = 0, row = 0; col < 3; col++, row++) {
-//            if(table[row][col].equals("_")) freeSpace++;
-//            if (table[row][0].equals(table[row][1]) && table[row][1].equals(table[row][2])) {
-//                if (table[row][0].equals("X")) {
-//                    xWins = true;
-//                }
-//                if (table[row][0].equals("O")) {
-//                    oWins = true;
-//                }
-//            }
-//            if (table[0][col].equals(table[1][col]) && table[1][col].equals(table[2][col])) {
-//                if (table[0][col].equals("X")) {
-//                    xWins = true;
-//                }
-//                if (table[0][col].equals("O")) {
-//                    oWins = true;
-//                }
-//            }
-//            if (table[0][0].equals(table[1][1]) && table[1][1].equals(table[2][2]) || table[2][0].equals(table[1][1]) && table[1][1].equals(table[0][2])) {
-//                if (table[1][1].equals("X")) {
-//                    xWins = true;
-//                }
-//                if (table[1][1].equals("O")) {
-//                    oWins = true;
-//                }
-//            }
-//
-//        }
-//        if(freeSpace == 0){
-//            if (xWins || oWins){}
-//            else{
-//                return "Draw";
-//            }
-//        }
-//        if (xWins) {
-//            if (oWins) {
-//                return "Impossible";
-//            }
-//            return "X wins";
-//        }
-//        if (oWins) {
-//            return "O wins";
-//        }
-//        if(Math.abs(x-o)>1){
-//            return "Impossible";
-//        }
-//        return "Game not finished";
-//    }
+    String checkWin(int x, int o) {
+        boolean xWins = false;
+        boolean oWins = false;
+        int freeSpace = 0;
+        for (int col = 0, row = 0; col < 3; col++, row++) {
+            if(table[row][col].equals("_")) freeSpace++;
+            if (table[row][0].equals(table[row][1]) && table[row][1].equals(table[row][2])) {
+                if (table[row][0].equals("X")) {
+                    xWins = true;
+                }
+                if (table[row][0].equals("O")) {
+                    oWins = true;
+                }
+            }
+            if (table[0][col].equals(table[1][col]) && table[1][col].equals(table[2][col])) {
+                if (table[0][col].equals("X")) {
+                    xWins = true;
+                }
+                if (table[0][col].equals("O")) {
+                    oWins = true;
+                }
+            }
+            if (table[0][0].equals(table[1][1]) && table[1][1].equals(table[2][2]) || table[2][0].equals(table[1][1]) && table[1][1].equals(table[0][2])) {
+                if (table[1][1].equals("X")) {
+                    xWins = true;
+                }
+                if (table[1][1].equals("O")) {
+                    oWins = true;
+                }
+            }
+
+        }
+        if(freeSpace == 0){
+            if (xWins || oWins){}
+            else{
+                return "Draw";
+            }
+        }
+        if (xWins) {
+            if (oWins) {
+                return "Impossible";
+            }
+            return "X wins";
+        }
+        if (oWins) {
+            return "O wins";
+        }
+        if(Math.abs(x-o)>1){
+            return "Impossible";
+        }
+        return "Game not finished";
+    }
     void play(){
         initTable();
-        //checkWin(x,o);
         printTable();
 
         while(true) {
             turnX();
-            break;
-            //turnO();
-            /* System.out.print("Enter the coordinates: ");
-
-            int row, col;
-            try {
-                row = scanner.nextInt() - 1;
-                col = scanner.nextInt() - 1;
-
-                switch (row){
-                    case 0 : if(col == 1){
-                                    row = 2;
-                                    col = 1;
-                                    break;
-                            }
-                            if(col == 2){
-                                    row = 1;
-                                    col = 1;
-                                    break;
-                            }
-                            if(col == 3){
-                                row = 0;
-                                col = 1;
-                                break;
-                            }
-                    case 1: if(col == 1){
-                                row = 2;
-                                col = 2;
-                                 break;
-                            }
-                            if(col == 2){
-                                row = 1;
-                                col = 2;
-                                break;
-                            }
-                            if(col == 3){
-                                row = 0;
-                                col = 2;
-                                break;
-                            }
-                    case 2: if(col == 1){
-                                row = 2;
-                                col = 3;
-                                break;
-                            }
-                            if(col == 2){
-                                row = 1;
-                                col = 3;
-                                break;
-                            }
-                            if(col == 3){
-                                row = 0;
-                                col = 3;
-                                break;
-                            }
-                }
-
-
-                if (row < 0 || row > 2 || col < 0 || col > 2) {
-                    System.out.println("Coordinates should be from 1 to 3!");
-                }
-                else if (!table[row][col].equals("_")) {
-                    //System.out.println("Row " + row + " Col " + col);
-                    System.out.println("This cell is occupied! Choose another one!");
-                } else {
-                    table[row][col] = "X";
-                    break;
-                }
-            }catch (InputMismatchException e){
-                scanner.nextLine();
-                System.out.println("You should enter numbers!");
-            }*/
+            if(checkWin(x,o).equals("X wins")){
+                System.out.println("X wins");
+                break;
+            }
+            turnO();
+            if(checkWin(x,o).equals("O wins")){
+                System.out.println("O wins");
+                break;
+            }
+            if(checkWin(x,o).equals("Draw")){
+                System.out.println("Draw");
+                break;
+            }
         }
     }
     void turnX(){
@@ -173,7 +113,7 @@ public class Main {
         try {
             row = scanner.nextInt() - 1;
             col = scanner.nextInt() - 1;
-            System.out.println("Row " + row + " col " + col);
+
             switch (row){
                 case 0 : if(col == 0){
                     row = 2;
@@ -221,10 +161,11 @@ public class Main {
                         break;
                     }
             }
-            System.out.println("Row " + row + " col " + col);
+
             if(isCellValid(row,col))
             {
                 table[row][col] = "X";
+                x++;
                 printTable();
             }
         }catch (InputMismatchException e){
@@ -290,6 +231,7 @@ public class Main {
             if(isCellValid(row,col))
             {
                 table[row][col] = "O";
+                o++;
                 printTable();
             }
         }catch (InputMismatchException e){
@@ -309,23 +251,4 @@ public class Main {
         }
         return true;
     }
-
-//    String[][] rotate(String [][]array){
-//        String[][] resultArray = new String[array[0].length][array.length];
-//        for (int i = 0; i < array.length; i++) {
-//            for (int j = 0; j < array[i].length; j++) {
-//                resultArray[array[i].length - j - 1][i] = array[i][j];
-//            }
-//        }
-//        return resultArray;
-//    }
-//    String[][]getArray(String[][] array){
-//        String[][] mass = new String[3][3];
-//        for (int i = 0; i < 3; i++) {
-//            for (int j = 1; j < 4; j++) {
-//                mass[i][j-1] = array[i][j];
-//            }
-//        }
-//        return mass;
-//    }
 }
