@@ -46,6 +46,10 @@ public class project {
                 System.out.println("X wins");
                 break;
             }
+            if(isFieldFull()){
+                System.out.println("Draw");
+                break;
+            }
             turnO();
             if (checkWin(O_SIGN)){
                 System.out.println("O wins");
@@ -124,11 +128,9 @@ public class project {
         return false;
     }
     boolean isFieldFull(){
-        for (char[] chars : field) {
-            for (char aChar : chars) {
-                if (aChar == EMPTY_SIGN) return false;
-            }
-        }
+        for (int row = 0; row < field.length; row++)
+            for (int col = 0; col < field[row].length; col++)
+                if (field[row][col] == EMPTY_SIGN) return false;
         return true;
     }
 }
